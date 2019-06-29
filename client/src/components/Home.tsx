@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import Tag from "../components/Tag";
-import GalleryCard from "../components/GalleryCard";
+import GalleryCard from "./GalleryCard";
+import TagList from "./TagList";
+import Gallery from "./Gallery";
 
 export default class Home extends Component {
   state = {
@@ -17,8 +18,18 @@ export default class Home extends Component {
       "Biki",
       "Aki",
       "Djura"
-    ]
+    ],
+    imgs: []
   };
+  componentDidMount() {
+    fetch("http://localhost:5000/pictures")
+      .then(data => data.json())
+      .then(res =>
+        this.setState({
+          imgs: res.pictures
+        })
+      );
+  }
   render() {
     return (
       <main className="home">
@@ -27,14 +38,8 @@ export default class Home extends Component {
         <p className="pictures-number">503 pictures of Dubai</p>
         <hr />
         <p>Related Searches:</p>
-        <div className="tag-list">
-          {this.state.tags.map(tag => (
-            <Tag tag={tag} />
-          ))}
-        </div>
-        <div className="gallery">
-          <GalleryCard />
-        </div>
+        <TagList tags={this.state.tags} />
+        <Gallery imgs={this.state.imgs} />
       </main>
     );
   }
