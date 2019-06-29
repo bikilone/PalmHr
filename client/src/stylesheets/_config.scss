@@ -6,3 +6,20 @@ $warning: #ffce00;
 $dark: #222428;
 $medium: #989aa2;
 $light: #f4f5f8;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
