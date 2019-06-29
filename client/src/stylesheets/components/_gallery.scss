@@ -10,8 +10,11 @@
   @media (min-width: 960px) {
     column-count: 4;
   }
-  @media (min-width: 1200x) {
+  @media (min-width: 1200px) {
     column-count: 5;
+  }
+  @media (min-width: 1920px) {
+    column-count: 6;
   }
   img {
     width: 42vw;
@@ -23,7 +26,10 @@
       width: 20vw;
     }
     @media (min-width: 1200px) {
-      width: 12vw;
+      width: 16vw;
+    }
+    @media (min-width: 1920px) {
+      width: 14vw;
     }
   }
 }
