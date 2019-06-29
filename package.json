@@ -4,5 +4,9 @@
   "scripts": {
     "start-server": "node server/index.js",
     "postinstall": "(cd server && npm install); (cd client && npm install)"
+  },
+  "dependencies": {
+    "@types/react-router-dom": "^4.3.4",
+    "react-router-dom": "^5.0.1"
   }
 }
