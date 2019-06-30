@@ -61,6 +61,13 @@ class App extends Component<AppProps> {
       return filteredNames || fitleredTags || filteredAuthors;
     });
 
+    const uniqueTags: string[] = [];
+    filteredImgs.forEach((picture: Picture) => {
+      // filtering out tags that already exists in tag array
+      const newTags = picture.tags.filter(tag => !uniqueTags.includes(tag));
+      uniqueTags.push(...newTags);
+    });
+
     return (
       <div>
         <Navbar onSearch={onSearchChange} />
@@ -71,7 +78,13 @@ class App extends Component<AppProps> {
             <Route
               exact
               path="/pictures"
-              render={() => <Home imgs={filteredImgs} tags={tags} />}
+              render={() => (
+                <Home
+                  imgs={filteredImgs}
+                  tags={uniqueTags}
+                  title={searchField}
+                />
+              )}
             />
             <Route path="/picture/:id" component={ImageDetail} />
             <Redirect from="/" to="/pictures" />

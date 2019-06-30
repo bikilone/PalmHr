@@ -6,15 +6,32 @@ import { connect } from "react-redux";
 import { fetchImgs } from "../store/actions";
 import Picture from "../interfaces/picture.interface";
 
-class Home extends Component<{ imgs: string[]; tags: string[] }> {
+class Home extends Component<{
+  imgs: string[];
+  tags: string[];
+  title: string;
+}> {
   render() {
-    const { imgs, tags } = this.props;
+    const { imgs, tags, title } = this.props;
+    const finalTitle = title
+      ? title.charAt(0).toUpperCase() + title.slice(1) + " pictures"
+      : "All Pictures";
 
+    let numOfPictures = "";
+    if (!title) {
+      numOfPictures = imgs.length + " pictures";
+    } else {
+      if (imgs.length === 1) {
+        numOfPictures = "One picture of " + title;
+      } else {
+        numOfPictures = imgs.length + " pictures of " + title;
+      }
+    }
     return (
       <main className="home">
-        <h1 className="section-title">Dubai Pictures</h1>
+        <h1 className="section-title">{finalTitle}</h1>
         <div className="line" />
-        <p className="pictures-number">503 pictures of Dubai</p>
+        <p className="pictures-number">{numOfPictures}</p>
         <hr />
         <p>Related Searches:</p>
         <TagList tags={tags} />
