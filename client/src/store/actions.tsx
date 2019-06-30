@@ -11,3 +11,10 @@ export const fetchImgs = () => (dipsatch: any) => {
       dipsatch({ type: constants.FETCH_IMGS_FAILED, payload: error })
     );
 };
+
+export const onSearch = (text: string) => {
+  return {
+    type: constants.CHANGE_SEARCH_FIELD,
+    payload: text
+  };
+};

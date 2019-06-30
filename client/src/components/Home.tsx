@@ -4,59 +4,11 @@ import Gallery from "./Gallery";
 import { connect } from "react-redux";
 
 import { fetchImgs } from "../store/actions";
+import Picture from "../interfaces/picture.interface";
 
-const mapStateToProps = (state: any) => {
-  return {
-    imgs: state.imgs,
-    isPending: state.isPending,
-    error: state.error,
-    tags: state.tags
-  };
-};
-
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-    onFetchImgs: () => dispatch(fetchImgs())
-  };
-};
-
-interface HomeProps {
-  onFetchImgs: () => void;
-  imgs: [];
-  tags: [];
-}
-
-class Home extends Component<HomeProps> {
-  state = {
-    tags: [
-      "Biki",
-      "Aki",
-      "Djura",
-      "Biki",
-      "Aki",
-      "Djura",
-      "Biki",
-      "Aki",
-      "Djura",
-      "Biki",
-      "Aki",
-      "Djura"
-    ],
-    imgs: []
-  };
-  componentDidMount() {
-    // fetch("http://localhost:5000/pictures")
-    //   .then(data => data.json())
-    //   .then(res =>
-    //     this.setState({
-    //       imgs: res.pictures
-    //     })
-    //   );
-    this.props.onFetchImgs();
-  }
+class Home extends Component<{ imgs: string[]; tags: string[] }> {
   render() {
     const { imgs, tags } = this.props;
-    console.log(imgs);
 
     return (
       <main className="home">
@@ -72,7 +24,4 @@ class Home extends Component<HomeProps> {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Home);
+export default Home;

@@ -2,23 +2,11 @@ import * as constants from "./constants";
 import Picture from "../interfaces/picture.interface";
 
 const initialState = {
-  tags: [
-    "Biki",
-    "Aki",
-    "Djura",
-    "Biki",
-    "Aki",
-    "Djura",
-    "Biki",
-    "Aki",
-    "Djura",
-    "Biki",
-    "Aki",
-    "Djura"
-  ],
+  tags: [],
   imgs: [],
   isPending: false,
-  error: ""
+  error: "",
+  authors: []
 };
 
 interface Action {
@@ -27,7 +15,7 @@ interface Action {
 }
 
 const collectTags = (pictures: Picture[]) => {
-  const tags: any[] = [];
+  const tags: string[] = [];
   pictures.forEach((picture: Picture) => {
     // filtering out tags that already exists in tag array
     const newTags = picture.tags.filter(tag => !tags.includes(tag));
@@ -36,7 +24,20 @@ const collectTags = (pictures: Picture[]) => {
   return tags;
 };
 
-export const fetcImgs = (state = initialState, action: Action = {}) => {
+const collectAuthors = (pictures: Picture[]) => {
+  const authors: string[] = [];
+  pictures.forEach((picture: Picture) => {
+    // filtering out authors that already exists in authors array
+    if (authors.includes(picture.author)) {
+      // skip
+    } else {
+      authors.push(picture.author);
+    }
+  });
+  return authors;
+};
+
+export const fetchImgs = (state = initialState, action: Action = {}) => {
   switch (action.type) {
     case constants.FETCH_IMGS_PENDING:
       return { ...state, isPending: true };
@@ -45,10 +46,27 @@ export const fetcImgs = (state = initialState, action: Action = {}) => {
         ...state,
         isPending: false,
         imgs: action.payload,
-        tags: collectTags(action.payload)
+        tags: collectTags(action.payload),
+        authors: collectAuthors(action.payload)
       };
     case constants.FETCH_IMGS_FAILED:
       return { ...state, error: action.payload, isPending: false };
+    default:
+      return state;
+  }
+};
+
+const initialSearchFieldState = {
+  searchField: ""
+};
+
+export const searchImgs = (
+  state: any = initialSearchFieldState,
+  action: Action = {}
+) => {
+  switch (action.type) {
+    case constants.CHANGE_SEARCH_FIELD:
+      return { ...state, searchField: action.payload };
     default:
       return state;
   }

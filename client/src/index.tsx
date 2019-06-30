@@ -6,10 +6,10 @@ import * as serviceWorker from "./serviceWorker";
 import { HashRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { createStore, combineReducers, applyMiddleware } from "redux";
-import { fetcImgs } from "./store/reducer";
+import { fetchImgs, searchImgs } from "./store/reducer";
 import thunkMiddleware from "redux-thunk";
-// const rootReducer = combineReducers()
-const store = createStore(fetcImgs, applyMiddleware(thunkMiddleware));
+const rootReducer = combineReducers({ fetchImgs, searchImgs } as any);
+const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 
 ReactDOM.render(
   <Provider store={store}>
