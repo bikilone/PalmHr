@@ -4,6 +4,7 @@ import TagList from "./TagList";
 import PriceSlot from "./PriceSlot";
 import { RouteComponentProps } from "react-router";
 import Picture from "../interfaces/picture.interface";
+import { Link } from "react-router-dom";
 
 export default class ImageDetail extends Component<
   RouteComponentProps<{ id: string }>,
@@ -49,10 +50,11 @@ export default class ImageDetail extends Component<
       <div className="detail-page">
         <img src={imgUri} className="detail-page-img" />
         <div className="detail-page-about">
-          <div className="back">
+          <Link to="/pictures" className="back">
             <i className="fas fa-chevron-left back-button" />
             <span>Back to Results</span>
-          </div>
+          </Link>
+
           <Author name={author} />
           <h1 className="img-title">{name}</h1>
           <p className="img-description">{description}</p>

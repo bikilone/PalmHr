@@ -4,11 +4,19 @@ import "./stylesheets/main.scss";
 import App from "./components/App";
 import * as serviceWorker from "./serviceWorker";
 import { HashRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import { fetcImgs } from "./store/reducer";
+import thunkMiddleware from "redux-thunk";
+// const rootReducer = combineReducers()
+const store = createStore(fetcImgs, applyMiddleware(thunkMiddleware));
 
 ReactDOM.render(
-  <HashRouter>
-    <App />
-  </HashRouter>,
+  <Provider store={store}>
+    <HashRouter>
+      <App />
+    </HashRouter>
+  </Provider>,
   document.getElementById("root")
 );
 
