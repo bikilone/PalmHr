@@ -1,0 +1,35 @@
+.detail-page {
+  display: grid;
+  grid-template-columns: calc(100vw - 2rem);
+  grid-template-areas: "img" "about";
+  margin-top: 2rem;
+  justify-items: center;
+  justify-content: center;
+  @media (min-width: 576px) {
+    grid-template-areas: "img about";
+    grid-template-columns: 1fr 1fr;
+  }
+  .detail-page-img {
+    grid-area: img;
+    width: calc(100% - 4rem);
+    display: inline-block;
+    margin-bottom: 1rem;
+    @media (min-width: 576px) {
+      width: calc(50vw - 2rem);
+    }
+  }
+  .detail-page-about {
+    grid-area: about;
+    width: calc(100% - 4rem);
+    @media (min-width: 576px) {
+      width: calc(50vw - 2rem);
+    }
+  }
+}
+
+.back {
+  color: $medium;
+  .back-button {
+    margin-right: 0.5rem;
+  }
+}

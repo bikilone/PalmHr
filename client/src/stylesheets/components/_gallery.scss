@@ -1,6 +1,7 @@
 .gallery {
   column-count: 2;
-  column-gap: 0rem;
+  column-width: 42vw;
+  column-gap: 0em;
   margin: auto;
   margin-top: 2rem;
   text-align: center;
@@ -16,9 +17,10 @@
   @media (min-width: 1920px) {
     column-count: 6;
   }
+
   img {
     width: 42vw;
-    margin-bottom: 1rem;
+    margin-bottom: 1em;
     @media (min-width: 576px) {
       width: 27vw;
     }
