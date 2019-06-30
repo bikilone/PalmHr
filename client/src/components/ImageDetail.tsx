@@ -3,36 +3,63 @@ import Author from "./Author";
 import TagList from "./TagList";
 import PriceSlot from "./PriceSlot";
 import { RouteComponentProps } from "react-router";
+import Picture from "../interfaces/picture.interface";
 
-export default class ImageDetail extends Component<RouteComponentProps> {
+export default class ImageDetail extends Component<
+  RouteComponentProps<{ id: string }>,
+  Picture
+> {
   state = {
-    prices: [20, 50, 100],
-    tags: ["Biki", "Aki", "Djura"],
-    img: ""
+    uri: "",
+    author: "",
+    name: "",
+    description: "",
+    tags: [],
+    price: {
+      small: 0,
+      medium: 0,
+      large: 0
+    },
+    exclusive: {
+      isSold: false,
+      price: 0
+    }
   };
   componentDidMount() {
-    this.setState({ img: "http://localhost:5000" + this.props.match.url });
+    const imgUri = this.props.match.url;
+    this.state.tags.find(tag => tag === "Biki");
+
+    fetch("http://localhost:5000/pictures")
+      .then(data => data.json())
+      .then(res => res.pictures)
+      .then(pictures => {
+        let selectedPicture = pictures.find(
+          (picture: Picture) => picture.uri === imgUri
+        );
+        this.setState({ ...selectedPicture });
+      });
   }
   render() {
+    const imgUri = "http://localhost:5000" + this.props.match.url;
+    const { author, name, description, tags, exclusive, price } = this.state;
+    const priceSlots = Object.values(price);
+
     return (
       <div className="detail-page">
-        <img src={this.state.img} className="detail-page-img" />
+        <img src={imgUri} className="detail-page-img" />
         <div className="detail-page-about">
           <div className="back">
             <i className="fas fa-chevron-left back-button" />
             <span>Back to Results</span>
           </div>
-          <Author />
-          <h1 className="img-title">Image Tittle</h1>
-          <p className="img-description">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae
-            repellendus accusantium maxime excepturi
-          </p>
-          <TagList tags={this.state.tags} />
+          <Author name={author} />
+          <h1 className="img-title">{name}</h1>
+          <p className="img-description">{description}</p>
+          <TagList tags={tags} />
           <hr />
           <div className="price-slots">
-            {this.state.prices.map(price => (
-              <PriceSlot price={price} />
+            {priceSlots.map((price, i) => (
+              <PriceSlot price={price} key={i} />
             ))}
           </div>
           <h1>Use this image excuslively for:</h1>
