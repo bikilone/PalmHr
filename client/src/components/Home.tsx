@@ -55,7 +55,7 @@ class Home extends Component<HomeProps> {
     this.props.onFetchImgs();
   }
   render() {
-    const { imgs } = this.props;
+    const { imgs, tags } = this.props;
     console.log(imgs);
 
     return (
@@ -65,7 +65,7 @@ class Home extends Component<HomeProps> {
         <p className="pictures-number">503 pictures of Dubai</p>
         <hr />
         <p>Related Searches:</p>
-        {/* <TagList tags={tags} /> */}
+        <TagList tags={tags} />
         <Gallery imgs={imgs} />
       </main>
     );
