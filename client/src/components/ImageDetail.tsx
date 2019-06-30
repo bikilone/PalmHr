@@ -43,6 +43,7 @@ export default class ImageDetail extends Component<
     const imgUri = "http://localhost:5000" + this.props.match.url;
     const { author, name, description, tags, exclusive, price } = this.state;
     const priceSlots = Object.values(price);
+    const priceSizes = Object.keys(price);
 
     return (
       <div className="detail-page">
@@ -59,12 +60,12 @@ export default class ImageDetail extends Component<
           <hr />
           <div className="price-slots">
             {priceSlots.map((price, i) => (
-              <PriceSlot price={price} key={i} />
+              <PriceSlot price={price} key={i} size={priceSizes[i]} />
             ))}
           </div>
-          <h1>Use this image excuslively for:</h1>
+          <h1 className="exclusively">Use this image exclusively for:</h1>
           <PriceSlot price={300} extended={true} />
-          <p>
+          <p className="exclusive-rights">
             Protect your work by licensing the exclusive rights to our images
             with Market Freeze
           </p>

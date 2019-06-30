@@ -5,6 +5,7 @@
   margin-top: 2rem;
   justify-items: center;
   justify-content: center;
+  overflow-x: hidden;
   @media (min-width: 576px) {
     grid-template-areas: "img about";
     grid-template-columns: 1fr 1fr;
@@ -42,4 +43,42 @@
 .img-description {
   font-size: 0.8rem;
   color: $medium;
+}
+
+.price-slots {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  justify-content: center;
+}
+
+.exclusively {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.exclusive-rights {
+  @extend .img-description;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.add-to-cart {
+  border-radius: 10px;
+  color: white;
+  background: $secondary;
+  font-size: 1.2rem;
+  width: 100%;
+  max-width: 400px;
+  padding: 0.5rem 1rem;
+  border: none;
+  outline: none;
+  margin-top: 1rem;
+  &:hover,
+  &:active {
+    color: $secondary;
+    background: white;
+    border: 1px solid $secondary;
+    cursor: pointer;
+  }
 }
