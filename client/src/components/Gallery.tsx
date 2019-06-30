@@ -1,14 +1,14 @@
-import React, { Component } from "react";
+import React from "react";
 import GalleryCard from "./GalleryCard";
 
-export default class Gallery extends Component<{ imgs: string[] }> {
-  render() {
-    return (
-      <div className="gallery">
-        {this.props.imgs.map((img, i) => (
-          <GalleryCard img={img} key={i} />
-        ))}
-      </div>
-    );
-  }
-}
+const Gallery: React.FC<{ imgs: string[] }> = props => {
+  return (
+    <div className="gallery">
+      {props.imgs.map((img, i) => (
+        <GalleryCard img={img} key={i} />
+      ))}
+    </div>
+  );
+};
+
+export default Gallery;

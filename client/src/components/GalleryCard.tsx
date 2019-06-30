@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 
-export default class GalleryCard extends Component<{ img: any }> {
-  render() {
-    return <img src={"http://localhost:5000" + this.props.img.uri} />;
-  }
-}
+const GalleryCard: React.FC<{ img: any }> = props => {
+  return <img src={"http://localhost:5000" + props.img.uri} />;
+};
+
+export default GalleryCard;
